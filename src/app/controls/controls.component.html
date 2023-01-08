@@ -1,0 +1,12 @@
+<div class="container">
+  <form [formGroup]="timeOutForm" (ngSubmit)="onSubmit(timeOutForm)">
+    <div>
+      Set timeout:
+      <input type="number" formControlName="gameTimeOut" min="1">
+    </div>
+    <button type="submit">Почати</button>
+  </form>
+  <div class="score">
+    <p>Гравець/Комп'ютер: 0 / 0</p>
+  </div>
+</div>

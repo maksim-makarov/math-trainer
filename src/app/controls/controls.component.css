@@ -1,0 +1,21 @@
+.container {
+  width: 55vh;
+  margin: 0 auto;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.score {
+  align-self: center;
+}
+
+form {
+  display: flex;
+  justify-content: space-between;
+}
+
+input {
+  width: 60px;
+}
