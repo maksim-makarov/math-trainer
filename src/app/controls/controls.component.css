@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope&family=Open+Sans&display=swap');
+
 .container {
   width: 55vh;
   margin: 0 auto;
-  margin-top: 10px;
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -9,13 +11,29 @@
 
 .score {
   align-self: center;
+  font-size: larger;
 }
 
 form {
   display: flex;
   justify-content: space-between;
+  font-size: larger;
+  align-items: flex-end;
 }
 
 input {
   width: 60px;
+  height: 20px;
+  border-radius: 10px;
+}
+
+button {
+  height: 30px;
+  width: 100px;
+  background: rgba(101, 228, 163, 1);
+  border: 2px solid rgba(101, 228, 163, 1);
+  border-radius: 56px;
+  font-family: 'Open Sans',
+    sans-serif;
+  font-weight: bold;
 }

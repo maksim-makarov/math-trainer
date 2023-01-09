@@ -1,1 +1,12 @@
-<p>result works!</p>
+<div class="backdrop">
+  <div class="container">
+    <div class="win" *ngIf="playerScore > pcScore">
+      <p>Вітаю! Ви виграли! </p>
+    </div>
+    <div class="lose" *ngIf="playerScore < pcScore">
+      <p>На жаль ви програли! </p>
+    </div>
+    <p>Гравець {{playerScore}}:{{pcScore}} Комп'ютер</p>
+    <button (click)="restartGame()">Грати знову!</button>
+  </div>
+</div>
