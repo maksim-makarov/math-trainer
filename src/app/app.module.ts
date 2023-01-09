@@ -7,8 +7,6 @@ import { ControlsComponent } from './controls/controls.component';
 import { ResultComponent } from './result/result.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-FormsModule;
-
 @NgModule({
   declarations: [
     AppComponent,

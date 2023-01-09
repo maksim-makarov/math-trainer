@@ -3,10 +3,11 @@
     <div>
       Set timeout:
       <input type="number" formControlName="gameTimeOut" min="1">
+      ms
     </div>
-    <button type="submit">Почати</button>
+    <button type="submit" [disabled]="gameOn">Почати</button>
   </form>
   <div class="score">
-    <p>Гравець/Комп'ютер: 0 / 0</p>
+    <p>Гравець {{playerScore}} : {{pcScore}} Комп'ютер</p>
   </div>
 </div>

@@ -13,5 +13,5 @@
 .block {
   width: 5.5vh;
   height: 5.5vh;
-  background-color: blue;
+  border-radius: 3px;
 }
