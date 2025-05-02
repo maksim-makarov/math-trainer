@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { GameServiceService } from './services/game-service.service';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +6,5 @@ import { GameServiceService } from './services/game-service.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  constructor(private gameService: GameServiceService) {}
-
-  title = 'BlockGame';
-  showResult: boolean = false;
-
-  ngDoCheck() {
-    this.showResult = this.gameService.showResult;
-  }
+  constructor() {}
 }
