@@ -1,6 +1,44 @@
 <div class="container">
-  <h1>Block game</h1>
-  <div class="blocks" (click)="click($event)">
-    <div class="block" *ngFor="let block of blocks" [style.background-color]=block.color [id]=block.id></div>
+  <h1>Math trainer</h1>
+  <div
+    *ngIf="showStartButton"
+    class="startButton">
+    <button
+      type="button"
+      (click)="startGame()"
+    >
+      Розпочати
+    </button>
   </div>
+  <div *ngFor="let exercise of exercises">
+    <div class="expression">
+      {{exercise.expression}}
+      <input
+        type="number"
+        [(ngModel)]="exercise.usersResult"
+        [disabled]="showResult"
+        [style.background-color]="showResult ? (exercise.usersResult === exercise.result ? 'green' : 'red') : 'white'"
+      >
+    </div>
+
+  </div>
+
+  <div class="action-buttons">
+
+  </div>
+
+  <button
+    *ngIf="!showStartButton && !showResult"
+    type="button"
+    (click)="showResultsClick()"
+  >
+    Перевірити
+  </button>
+  <button
+    *ngIf="showResult"
+    type="button"
+    (click)="startGame()"
+  >
+    Почати знов
+  </button>
 </div>

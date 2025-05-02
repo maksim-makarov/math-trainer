@@ -1,34 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { GameServiceService } from '../services/game-service.service';
+
+const TYPES = [1,2,3,4];
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'],
 })
+
 export class MainComponent implements OnInit {
-  constructor(private gameService: GameServiceService) {}
+  constructor() {}
 
-  blocks: { id: number; color: string }[] = [];
-
-  click(event: any): void {
-    if (event.target.className !== 'block') return;
-    else {
-      if (event.target.style.backgroundColor !== 'yellow') return;
-      else {
-        this.gameService.turnToGreen(event.target.id);
-        this.gameService.playerScore++;
-        if (this.gameService.playerScore === 10) {
-          clearInterval(this.gameService.timerId);
-          this.gameService.showResult = true;
-        }
-      }
-    }
-  }
+  exercises: {expression: string; result: number; usersResult?: number}[] = [];
+  showStartButton: boolean = true;
+  showResult: boolean = false;
 
   ngOnInit(): void {
-    this.gameService.generateBlocks().subscribe((blocks) => {
-      this.blocks = blocks;
-    });
+  }
+
+  startGame() {
+    this.exercises = [];
+    this.showStartButton = false;
+    this.showResult = false;
+    console.log('initial',this.exercises)
+    while (this.exercises.length <10) {
+      // const randomNumber = Math.floor(Math.random() * 100) + 1;
+      // this.exersises.push(randomNumber);
+      // const index = Math.floor(Math.random() * TYPES.length);
+
+      this.exercises.push(this.createType1());
+      this.createType1();
+    }
+    console.log(this.exercises)
+  }
+
+  createType1() {
+    const first = Math.floor(Math.random() * 10) + 1;
+    const second = Math.floor(Math.random() * 10) + 1;
+    const result = first + second;
+    const expression: string = `${first} + ${second} = `;
+    return {expression, result};
+    }
+
+  showResultsClick() {
+    this.showResult = true;
   }
 }
