@@ -18,6 +18,11 @@ export class MainComponent {
   showStartButton = true;
   showResult = false;
 
+  timer: number = 0;
+  timerInterval: any;
+  minutes: number = 0;
+  seconds: number = 0;
+
   private generators: Record<number, () => Exercise> = {
     1: this.createType1.bind(this),
     2: this.createType2.bind(this),
@@ -29,6 +34,9 @@ export class MainComponent {
     this.exercises = [];
     this.showStartButton = false;
     this.showResult = false;
+
+    this.startTimer();
+
     while (this.exercises.length < 10) {
       const type = this.getRandomInt(1, 4);
       const generator = this.generators[type];
@@ -40,6 +48,22 @@ export class MainComponent {
         this.exercises.push(newExample);
       }
     }
+  }
+
+  private startTimer() {
+    this.timer = 0;
+    this.minutes = 0;
+    this.seconds = 0;
+
+    this.timerInterval = setInterval(() => {
+      this.timer++;
+      this.minutes = Math.floor(this.timer / 60);
+      this.seconds = this.timer % 60;
+    }, 1000);
+  }
+
+  stopTimer() {
+    clearInterval(this.timerInterval);
   }
 
   getRandomInt(min: number, max: number): number {
