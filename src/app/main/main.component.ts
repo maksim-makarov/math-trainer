@@ -17,12 +17,8 @@ export class MainComponent implements OnInit {
   exercises: {expression: string; result: number; usersResult?: number}[] = [];
   showStartButton: boolean = true;
   showResult: boolean = false;
-  creators = [this.createType1, this.createType2, this.createType3];
 
   ngOnInit(): void {
-    // for (let i = 0; i < 100; i++) {
-    //   this.createType3();
-    // }
   }
 
   startGame() {
@@ -30,11 +26,9 @@ export class MainComponent implements OnInit {
     this.showStartButton = false;
     this.showResult = false;
     while (this.exercises.length <10) {
-      const type = Math.floor(Math.random() * this.creators.length);
-
-
-
-      const newExample = this.creators[type]();
+      const type = this.getRandomInt(1,4);
+      // @ts-ignore
+      const newExample = this[`createType${type}`]();
       const exists = this.exercises.some(exercise => exercise.expression === newExample.expression);
       if (!exists) {
         this.exercises.push(newExample);
@@ -42,13 +36,19 @@ export class MainComponent implements OnInit {
     }
   }
 
+  getRandomInt(min: number, max: number): number {
+    const lower = Math.ceil(min);
+    const upper = Math.floor(max);
+    return Math.floor(Math.random() * (upper - lower + 1)) + lower;
+  }
+
   createType1() {
     let first;
     let second;
     let result: number | null = null
     while (!result) {
-      first = Math.floor(Math.random() * 9) + 1;
-      second = Math.floor(Math.random() * 9) + 1;
+      first = this.getRandomInt(1, 9);
+      second = this.getRandomInt(1, 9);
       if ((first + second) > 10) {
         result = first + second
       }
@@ -62,9 +62,10 @@ export class MainComponent implements OnInit {
     let second;
     let result: number | null = null
     while (!result) {
-      first = Math.floor(Math.random() * 9) + 1;
-      second = Math.floor(Math.random() * 9) + 1;
-      if ((first - second) > 0) {
+      first = this.getRandomInt(11,19);
+      second = this.getRandomInt(1,9);
+      const firstOnes = first % 10;
+      if ((first - second) > 0 && (second > firstOnes)) {
         result = first - second
       }
     }
@@ -73,26 +74,40 @@ export class MainComponent implements OnInit {
   }
 
   createType3() {
-    const first = Math.floor(Math.random() * 99) + 1;
-    const firstTens = Math.floor(first / 10);
-    const firstOnes = first % 10;
-    let result: number | null = null
+    let first;
     let second;
+    let result: number | null = null
     while (!result) {
-      second = Math.floor(Math.random() * 99) + 1;
+      first = this.getRandomInt(11,99);
+      const firstTens = Math.floor(first / 10);
+      const firstOnes = first % 10;
+      second = this.getRandomInt(11,99);
       const secondTens = Math.floor(second / 10);
       const secondOnes = second % 10;
       if (((firstTens + secondTens < 10) && (firstOnes + secondOnes <10))) {
         result = first + second;
       }
     }
-
-    // console.log(first, firstTens, firstOnes);
-    // const secondTens = Math.floor(Math.random() * (9 - (10-firstTens) + 1)) + (10-firstTens);
-    // const secondOnes = Math.floor(Math.random() * (9 - (10-firstOnes) + 1)) + (10-firstOnes);
-    // console.log(secondTens, secondOnes);
     const expression: string = `${first} + ${second} =`;
-    console.log(expression);
+    return {expression, result};
+  }
+
+  createType4() {
+    let first;
+    let second;
+    let result: number | null = null
+    while (!result) {
+      first = this.getRandomInt(11,99);
+      const firstTens = Math.floor(first / 10);
+      const firstOnes = first % 10;
+      second = this.getRandomInt(11,99);
+      const secondTens = Math.floor(second / 10);
+      const secondOnes = second % 10;
+      if (((firstTens > secondTens) && (firstOnes > secondOnes))) {
+        result = first - second;
+      }
+    }
+    const expression: string = `${first} - ${second} =`;
     return {expression, result};
   }
 
