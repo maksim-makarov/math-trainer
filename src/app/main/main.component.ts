@@ -110,8 +110,4 @@ export class MainComponent implements OnInit {
     const expression: string = `${first} - ${second} =`;
     return {expression, result};
   }
-
-  showResultsClick() {
-    this.showResult = true;
-  }
 }
