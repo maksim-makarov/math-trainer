@@ -10,17 +10,18 @@
       Розпочати
     </button>
   </div>
-  <div *ngFor="let exercise of exercises">
-    <div class="expression">
-      {{exercise.expression}}
-      <input
-        type="number"
-        [(ngModel)]="exercise.usersResult"
-        [disabled]="showResult"
-        [style.background-color]="showResult ? (exercise.usersResult === exercise.result ? 'green' : 'red') : 'white'"
-      >
+  <div class="exercises-block">
+    <div *ngFor="let exercise of exercises">
+      <div class="expression">
+        {{exercise.expression}}
+        <input
+          type="number"
+          [(ngModel)]="exercise.usersResult"
+          [disabled]="showResult"
+          [style.background-color]="showResult ? (exercise.usersResult === exercise.result ? 'green' : 'red') : 'white'"
+        >
+      </div>
     </div>
-
   </div>
 
   <div class="action-buttons">

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 // ng build --configuration production --base-href "/math-trainer/"
 // npx angular-cli-ghpages --dir=dist/math-trainer
 
-const TYPES = [1,2];
+type Exercise = { expression: string; result: number; usersResult?: number };
 
 @Component({
   selector: 'app-main',
@@ -11,25 +11,31 @@ const TYPES = [1,2];
   styleUrls: ['./main.component.css'],
 })
 
-export class MainComponent implements OnInit {
+export class MainComponent {
   constructor() {}
 
-  exercises: {expression: string; result: number; usersResult?: number}[] = [];
-  showStartButton: boolean = true;
-  showResult: boolean = false;
+  exercises: Exercise[] = [];
+  showStartButton = true;
+  showResult = false;
 
-  ngOnInit(): void {
-  }
+  private generators: Record<number, () => Exercise> = {
+    1: this.createType1.bind(this),
+    2: this.createType2.bind(this),
+    3: this.createType3.bind(this),
+    4: this.createType4.bind(this),
+  };
 
   startGame() {
     this.exercises = [];
     this.showStartButton = false;
     this.showResult = false;
-    while (this.exercises.length <10) {
-      const type = this.getRandomInt(1,4);
-      // @ts-ignore
-      const newExample = this[`createType${type}`]();
-      const exists = this.exercises.some(exercise => exercise.expression === newExample.expression);
+    while (this.exercises.length < 10) {
+      const type = this.getRandomInt(1, 4);
+      const generator = this.generators[type];
+      if (!generator) continue;
+
+      const newExample = generator();
+      const exists = this.exercises.some(e => e.expression === newExample.expression);
       if (!exists) {
         this.exercises.push(newExample);
       }

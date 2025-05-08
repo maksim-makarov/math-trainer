@@ -49,3 +49,9 @@ input[type="number"] {
   justify-content: space-between;
   align-items: center;
 }
+
+.exercises-block {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
