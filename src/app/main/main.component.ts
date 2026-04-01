@@ -28,9 +28,11 @@ export class MainComponent {
     2: this.createType2.bind(this),
     3: this.createType3.bind(this),
     4: this.createType4.bind(this),
+    5: this.createType5.bind(this),
+    6: this.createType6.bind(this),
   };
 
-  startGame() {
+  startGameAdd() {
     this.exercises = [];
     this.showStartButton = false;
     this.showResult = false;
@@ -39,6 +41,27 @@ export class MainComponent {
 
     while (this.exercises.length < 10) {
       const type = this.getRandomInt(1, 4);
+      const generator = this.generators[type];
+      if (!generator) continue;
+
+      const newExample = generator();
+      const exists = this.exercises.some(e => e.expression === newExample.expression);
+      if (!exists) {
+        this.exercises.push(newExample);
+      }
+    }
+  }
+
+  startGameMultiply() {
+    this.exercises = [];
+    this.showStartButton = false;
+    this.showResult = false;
+
+    this.startTimer();
+
+    while (this.exercises.length < 10) {
+      const type = this.getRandomInt(5, 6);
+      console.log(type);
       const generator = this.generators[type];
       if (!generator) continue;
 
@@ -139,5 +162,28 @@ export class MainComponent {
     }
     const expression: string = `${first} - ${second} =`;
     return {expression, result};
+  }
+
+  createType5() {
+    const first = this.getRandomInt(1,9);
+    const second = this.getRandomInt(1,9);
+    const result = first * second;
+    const expression: string = `${first} * ${second} =`;
+    return {expression, result};
+  }
+
+  createType6() {
+    const first = this.getRandomInt(1,9);
+    const second = this.getRandomInt(1,9);
+    const multiplicationResult = first * second;
+    const result = multiplicationResult/second
+    const expression: string = `${multiplicationResult} : ${second} =`;
+    return {expression, result};
+  }
+
+  restart() {
+    this.showStartButton = true;
+    this.showResult = false;
+    this.exercises = [];
   }
 }
