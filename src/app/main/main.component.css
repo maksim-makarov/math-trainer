@@ -64,3 +64,14 @@ input[type="number"] {
   font-weight: bold;
   color: white;
 }
+
+.buttons-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 5rem;
+}
+
+.buttons-block button {
+  width: fit-content;
+}

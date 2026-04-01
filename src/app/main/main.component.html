@@ -5,16 +5,30 @@
     {{ minutes }}:{{ seconds | number: '2.0' }}
   </div>
 
-  <div
-    *ngIf="showStartButton"
-    class="startButton">
-    <button
-      type="button"
-      (click)="startGame()"
-    >
-      Розпочати
-    </button>
+  <div class="buttons-block">
+    <div
+      *ngIf="showStartButton"
+      class="startButton">
+      <button
+        type="button"
+        (click)="startGameAdd()"
+      >
+        Додавання - Віднімання
+      </button>
+    </div>
+    <div
+      *ngIf="showStartButton"
+      class="startButton">
+      <button
+        type="button"
+        (click)="startGameMultiply()"
+      >
+        Множення - Ділення
+      </button>
+    </div>
   </div>
+
+
   <div class="exercises-block">
     <div *ngFor="let exercise of exercises">
       <div class="expression">
@@ -43,7 +57,7 @@
   <button
     *ngIf="showResult"
     type="button"
-    (click)="startGame()"
+    (click)="restart()"
   >
     Почати знов
   </button>
